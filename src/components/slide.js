@@ -31,7 +31,8 @@ const Slide = React.createClass({
     styles: PropTypes.object,
     export: PropTypes.bool,
     print: PropTypes.bool,
-    overview: PropTypes.bool
+    overview: PropTypes.bool,
+    store: PropTypes.object
   },
   getInitialState() {
     return {

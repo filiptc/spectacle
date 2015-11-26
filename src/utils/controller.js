@@ -14,7 +14,7 @@ const history = process.env.NODE_ENV === "production" ?
 export default class Controller extends Component {
   componentDidMount() {
     this.unlisten = history.listen((location) => {
-      this.props.dispatch(updateRoute(location));
+      this.props.store.dispatch(updateRoute(location));
     });
   }
   componentWillUnmount() {
@@ -28,7 +28,8 @@ export default class Controller extends Component {
     const Context = context(React.Children.only(this.props.children), {
       history: history,
       styles: styles.screen,
-      print: styles.print
+      print: styles.print,
+      store: this.props.store
     });
     return <Context />;
   }

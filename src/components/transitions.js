@@ -46,6 +46,9 @@ export default {
       cb();
     }
   },
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props, nextProps)
+  },
   componentWillEnter(cb) {
     const { slideIndex, lastSlide, transition, transitionDuration } = this.props;
     const direction = slideIndex > lastSlide;
@@ -123,9 +126,9 @@ export default {
 
   },
   componentWillLeave(cb) {
-    console.log(this.props)
+    console.log(this.context)
     const { slideIndex, transition, transitionDuration } = this.props;
-    const slide = this.context.slide || 0;
+    const slide = this.context.store.getState().route.slide || 0;
     const direction = slideIndex > slide;
 
     this.setState({
