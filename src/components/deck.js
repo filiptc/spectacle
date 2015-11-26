@@ -18,6 +18,7 @@ import Fullscreen from "./fullscreen";
 import Progress from "./progress";
 const TransitionGroup = Radium(ReactTransitionGroup);
 
+@connect((state) => state)
 @Radium
 export default class Deck extends Component {
   static displayName = "Deck";
@@ -56,12 +57,13 @@ export default class Deck extends Component {
     };
   }
   componentDidMount() {
+    console.log('mounted')
     const slide = this._getSlideIndex();
     this.setState({
       lastSlide: slide
     });
     localStorage.setItem("spectacle-slide",
-      JSON.stringify({slide: this.context.store.getState().route.slide, forward: false, time: Date.now()}));
+      JSON.stringify({slide: this.props.route.slide, forward: false, time: Date.now()}));
     this._attachEvents();
   }
   componentWillUnmount() {
@@ -94,11 +96,11 @@ export default class Deck extends Component {
   }
   _toggleOverviewMode() {
     const suffix = this.context.overview ? "" : "?overview";
-    this.props.dispatch(updatePath(`/${this.context.store.getState().route.slide}${suffix}`));
+    this.props.dispatch(updatePath(`/${this.props.route.slide}${suffix}`));
   }
   _togglePresenterMode() {
     const suffix = this.context.presenter ? "" : "?presenter";
-    this.props.dispatch(updatePath(`/${this.context.store.getState().route.slide}${suffix}`));
+    this.props.dispatch(updatePath(`/${this.props.route.slide}${suffix}`));
   }
   _getSuffix() {
     if (this.context.presenter) {
@@ -116,7 +118,7 @@ export default class Deck extends Component {
       this.setState({
         lastSlide: slide || 0
       });
-      if (this._checkFragments(this.context.store.getState().route.slide, data.forward)) {
+      if (this._checkFragments(this.props.route.slide, data.forward)) {
         this.props.dispatch(updatePath(`/${data.slide}${this._getSuffix()}`));
       }
     }
@@ -126,7 +128,7 @@ export default class Deck extends Component {
     this.setState({
       lastSlide: slide
     });
-    if (this._checkFragments(this.context.store.getState().route.slide, false) || this.context.overview) {
+    if (this._checkFragments(this.props.route.slide, false) || this.context.overview) {
       if (slide > 0) {
         this.context.history.replaceState(null, `/${this._getHash(slide - 1)}${this._getSuffix()}`);
         localStorage.setItem("spectacle-slide",
@@ -142,7 +144,7 @@ export default class Deck extends Component {
     this.setState({
       lastSlide: slide
     });
-    if (this._checkFragments(this.context.store.getState().route.slide, true) || this.context.overview) {
+    if (this._checkFragments(this.props.route.slide, true) || this.context.overview) {
       if (slide < this.props.children.length - 1) {
         this.context.history.replaceState(null, `/${this._getHash(slide + 1) + this._getSuffix()}`);
         localStorage.setItem("spectacle-slide",
@@ -284,14 +286,14 @@ export default class Deck extends Component {
   }
   _getSlideIndex() {
     let index = 0;
-    if (!parseInt(this.context.store.getState().route.slide)) {
+    if (!parseInt(this.props.route.slide)) {
       Children.toArray(this.props.children).forEach((slide, i) => {
-        if (slide.props.id === this.context.store.getState().route.slide) {
+        if (slide.props.id === this.props.route.slide) {
           index = i;
         }
       });
     } else {
-      index = parseInt(this.context.store.getState().route.slide);
+      index = parseInt(this.props.route.slide);
     }
     return index;
   }
@@ -303,7 +305,7 @@ export default class Deck extends Component {
       fragments: this.props.fragment,
       key: slide,
       children: Children.toArray(child.props.children),
-      hash: this.context.store.getState().route.slide,
+      hash: this.props.route.slide,
       slideIndex: slide,
       lastSlide: this.state.lastSlide,
       transition: child.props.transition.length ?
@@ -348,7 +350,7 @@ export default class Deck extends Component {
           dispatch={this.props.dispatch}
           slides={children}
           slide={this._getSlideIndex()}
-          hash={this.context.store.getState().route.slide}
+          hash={this.props.route.slide}
           lastSlide={this.state.lastSlide}
         />
       );

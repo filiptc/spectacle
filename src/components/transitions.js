@@ -123,6 +123,7 @@ export default {
 
   },
   componentWillLeave(cb) {
+    console.log(this.props)
     const { slideIndex, transition, transitionDuration } = this.props;
     const slide = this.context.slide || 0;
     const direction = slideIndex > slide;

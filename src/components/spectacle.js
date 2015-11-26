@@ -15,7 +15,7 @@ export default class Spectacle extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Controller theme={this.props.theme}>
+        <Controller theme={this.props.theme} dispatch={store.dispatch}>
           {this.props.children}
         </Controller>
       </Provider>

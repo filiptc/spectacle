@@ -22,7 +22,7 @@ const Appear = React.createClass({
   },
   componentWillReceiveProps(nextProps) {
     const state = nextProps.fragment;
-    const slide = this.context.slide;
+    const slide = this.props.route.slide;
     const fragment = this.refs.fragment;
     const key = _.findKey(state.fragments[slide], {
       "id": parseInt(fragment.dataset.fid)

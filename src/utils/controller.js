@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from "react";
-import { connect } from "react-redux";
 
 import createBrowserHistory from "history/lib/createBrowserHistory";
 import createHashHistory from "history/lib/createHashHistory";
@@ -21,14 +20,15 @@ export default class Controller extends Component {
   componentWillUnmount() {
     this.unlisten();
   }
+  shouldComponentUpdate(nextProps) {
+    return this.props != nextProps
+  }
   render() {
     const styles = this.props.theme ? this.props.theme : theme();
     const Context = context(React.Children.only(this.props.children), {
       history: history,
       styles: styles.screen,
       print: styles.print
-    }, {
-      dispatch: this.props.dispatch
     });
     return <Context />;
   }
