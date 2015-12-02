@@ -1,0 +1,19 @@
+# add AVA to your package.json
+ava --init
+
+# package.json
+ {
+  ...
+  "scripts": {
+      "test": "ava"
+  },
+  "devDependencies": {
+      "ava": "^0.6.0"
+  }
+  ...
+ }
+
+# execute
+npm test
+
+# runs all test.js test-*.js test/*.js files

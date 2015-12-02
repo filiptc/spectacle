@@ -1,0 +1,17 @@
+# package.json
+ {
+  ...
+  "scripts": {
+    "test": "jest"
+  }
+  ...
+ }
+
+ # create test dir
+ mkdir __tests__
+
+ # create test
+ $EDITOR npm __tests__/foo.js
+
+ # execute
+ npm test

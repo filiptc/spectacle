@@ -1,0 +1,14 @@
+// jasmine.json
+
+{
+  // test files
+  "spec_dir": "spec",
+  "spec_files": [
+    "**/*[sS]pec.js"
+  ],
+
+  // helper files (executed before specs)
+  "helpers": [
+    "helpers/**/*.js"
+  ]
+}

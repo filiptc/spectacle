@@ -1,0 +1,18 @@
+// test-player.js
+
+import test from 'ava';
+
+var Player = require('./Player');
+var player;
+var song;
+
+test.beforeEach(t => {
+    player = new Player();
+    song = "foo";
+});
+
+test("Player should be able to play a Song", t => {
+    player.play(song);
+    t.is(player.currentlyPlayingSong, song);
+    t.true(player.isPlaying);
+});

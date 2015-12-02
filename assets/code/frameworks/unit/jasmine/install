@@ -1,0 +1,5 @@
+# install
+npm install -g jasmine
+
+# initialize (creates ./spec/support/jasmine.json)
+jasmine init

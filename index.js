@@ -2,140 +2,442 @@ import React from "react";
 import { render } from "react-dom";
 
 import {
-  Appear, BlockQuote, Cite, CodePane, Deck, Fill,
+  Appear, BlockQuote, Cite, CodePane, Deck, Fill, Fit,
   Heading, Image, Layout, Link, ListItem, List, Markdown, Quote, Slide, Spectacle, Text
 } from "./src";
 
 import preloader from "./src/utils/preloader";
 
-import Interactive from "./assets/interactive";
-
 require("normalize.css");
 require("./src/themes/default/index.css");
 
 const images = {
-  city: require("./assets/city.jpg"),
-  kat: require("./assets/kat.png"),
-  logo: require("./assets/formidable-logo.svg"),
-  markdown: require("./assets/markdown.png")
+  phil: require("./assets/phil.jpg")
 };
 
-preloader([images.city, images.kat, images.markdown]);
+const code = {
+  assertions: {
+    assert: require("raw!./assets/code/assertions/assert"),
+    expect: require("raw!./assets/code/assertions/expect"),
+    must: require("raw!./assets/code/assertions/must"),
+    should: require("raw!./assets/code/assertions/should"),
+    chai: require("raw!./assets/code/assertions/chai")
+  },
+  frameworks: {
+    unit: {
+      jasmine: {
+        install: require("raw!./assets/code/frameworks/unit/jasmine/install"),
+        configure: require("raw!./assets/code/frameworks/unit/jasmine/configure"),
+        spec: require("raw!./assets/code/frameworks/unit/jasmine/spec")
+      },
+      mocha: {
+        install: require("raw!./assets/code/frameworks/unit/mocha/install"),
+        configure: require("raw!./assets/code/frameworks/unit/mocha/configure"),
+        spec: require("raw!./assets/code/frameworks/unit/mocha/spec")
+      },
+      jest: {
+        install: require("raw!./assets/code/frameworks/unit/jest/install"),
+        configure: require("raw!./assets/code/frameworks/unit/jest/configure"),
+        spec: require("raw!./assets/code/frameworks/unit/jest/spec")
+      },
+      ava: {
+        install: require("raw!./assets/code/frameworks/unit/ava/install"),
+        configure: require("raw!./assets/code/frameworks/unit/ava/configure"),
+        spec: require("raw!./assets/code/frameworks/unit/ava/spec")
+      },
+      code: {
+        example: require("raw!./assets/code/example")
+      }
+    },
+    e2e: {
+      casper: {
+        install: require("raw!./assets/code/frameworks/e2e/casper/install"),
+        configure: require("raw!./assets/code/frameworks/e2e/casper/configure"),
+        test: require("raw!./assets/code/frameworks/e2e/casper/test.js")
+      },
+      nightwatch: {
+        install: require("raw!./assets/code/frameworks/e2e/nightwatch/install"),
+        configure: require("raw!./assets/code/frameworks/e2e/nightwatch/configure"),
+        test: require("raw!./assets/code/frameworks/e2e/nightwatch/test.js")
+      }
+    }
+  }
+};
 
 render(
-  <Spectacle>
-    <Deck transition={["zoom", "slide"]} transitionDuration={500}>
-      <Slide transition={["zoom"]} bgColor="primary">
-        <Heading size={1} fit caps lineHeight={1} textColor="black">
-          Spectacle
-        </Heading>
-        <Heading size={1} fit caps>
-          A ReactJS Presentation Library
-        </Heading>
-        <Heading size={1} fit caps textColor="black">
-          Where You Can Write Your Decks In JSX
-        </Heading>
-        <Link href="https://github.com/FormidableLabs/spectacle">
-          <Text bold caps textColor="tertiary">View on Github</Text>
-        </Link>
-        <Text textSize="1.5em" margin="20px 0px 0px" bold>Hit Your Right Arrow To Begin!</Text>
-      </Slide>
-      <Slide transition={["slide"]} bgColor="black" notes="You can even put notes on your slide. How awesome is that?">
-        <Image src={images.kat.replace("/", "")} margin="0px auto 40px" height="293px"/>
-        <Heading size={1} fit textColor="primary" textFont="secondary">
-          Wait what?
-        </Heading>
-      </Slide>
-      <Slide transition={["zoom", "fade"]} bgColor="primary" notes="<ul><li>talk about that</li><li>and that</li></ul>">
-        <CodePane
-          lang="jsx"
-          source={require("raw!./assets/deck.example")}
-          margin="20px auto"
-        />
-      </Slide>
-      <Slide transition={["slide"]} bgImage={images.city.replace("/", "")} bgDarken={0.75}>
-        <Appear fid="1">
-          <Heading size={1} caps fit textColor="primary">
-            Full Width
+    <Spectacle>
+      <Deck transition={["spin", "slide"]} transitionDuration={500}>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary">
+          <Heading size={1} fit caps lineHeight={1} textColor="seconary">
+            Testing
           </Heading>
-        </Appear>
-        <Appear fid="2">
-          <Heading size={1} caps fit textColor="tertiary">
-            Adjustable Darkness
+          <Heading size={1} fit caps>
+            your React (and Redux)
           </Heading>
-        </Appear>
-        <Appear fid="3">
-          <Heading size={1} caps fit textColor="primary">
-            Background Imagery
+          <Heading size={1} fit caps textColor="tertiary">
+            Applications
           </Heading>
-        </Appear>
-      </Slide>
-      <Slide transition={["zoom", "fade"]} bgColor="primary">
-        <Heading caps fit>Flexible Layouts</Heading>
-        <Layout>
-          <Fill>
-            <Heading size={4} caps textColor="secondary" bgColor="white" margin={10}>
-              Left
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary">
+          <Heading size={3} textColor="secondary" textAlign="left">About me</Heading>
+          <Layout>
+            <Fill>
+              <List margin={10} textColor="tertiary">
+                <ListItem>Former Drupal developer</ListItem>
+                <ListItem>Former PHP developer</ListItem>
+                <ListItem>Former AngularJS developer</ListItem>
+                <ListItem>Go developer @ source{"{d}"}</ListItem>
+                <ListItem>ReactJS developer @ source{"{d}"}</ListItem>
+              </List>
+            </Fill>
+            <Fill width={250}>
+              <Image src={images.phil} height={250} />
+              <Text textColor="tertiary">Phil Thomas</Text>
+              <Text textColor="secondary">@filiptc</Text>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" textColor="primary" notes="
+        <ol>
+          <li>1. assertion libraries, testing frameworks, testing environment</li>
+          <li>2. Unit vs e2e. Examples with jasmine, mocha, jest, ava, Examples with Casper.js, Nightwatch.js</li>
+          <li>3. components, flux and state, redux</li>
+          <li>4. example with Nightwatch.js</li>
+        </ol>
+      ">
+          <Heading size={1} fit caps textColor="secondary">
+            Table of contents
+          </Heading>
+          <Appear fid="1">
+            <Heading textAlign="left" size={5} caps textColor="tertiary">
+              1. Vocabulary
             </Heading>
-          </Fill>
-          <Fill>
-            <Heading size={4} caps textColor="secondary" bgColor="white" margin={10}>
-              Right
+          </Appear>
+          <Appear fid="2">
+            <Heading textAlign="left" size={5} caps textColor="tertiary">
+              2. Testing Frameworks
             </Heading>
-          </Fill>
-        </Layout>
-      </Slide>
-      <Slide transition={["slide"]} bgColor="black">
-        <BlockQuote>
-          <Quote>Wonderfully formatted quotes</Quote>
-          <Cite>Ken Wheeler</Cite>
-        </BlockQuote>
-      </Slide>
-      <Slide transition={["spin", "zoom"]} bgColor="tertiary">
-        <Heading caps fit size={1} textColor="primary">
-          Inline Markdown
-        </Heading>
-        <Markdown>
-          {`
-![Markdown Logo](${images.markdown.replace("/", "")})
+          </Appear>
+          <Appear fid="3">
+            <Heading textAlign="left" size={5} caps textColor="tertiary">
+              3. React unit testing
+            </Heading>
+          </Appear>
+          <Appear fid="4">
+            <Heading textAlign="left" size={5} caps textColor="tertiary">
+              4. React end-to-end testing
+            </Heading>
+          </Appear>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="Questions <br/>1) professional front-end devs<br/>2) has ever done tests<br/>3) does tests right now<br/>4) both e2e and unit" >
+          <Heading textColor="secondary" caps fit>Vocabulary</Heading>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            Vocabulary: Assertion Libraries
+          </Heading>
+          <Layout>
+            <Fill>
+              <List margin={10}>
+                <ListItem>
+                  should.js
+                  <CodePane textSize={20} lang="js" source={code.assertions.should}/>
+                </ListItem>
+                <ListItem>
+                  expect.js
+                  <CodePane textSize={20} lang="js" source={code.assertions.expect}/>
+                </ListItem>
+                <ListItem>
+                  node.js/assert
+                  <CodePane textSize={20} lang="js" source={code.assertions.assert}/>
+                </ListItem>
+                <ListItem>
+                  must.js
+                  <CodePane textSize={20} lang="js" source={code.assertions.must}/>
+                </ListItem>
+              </List>
+            </Fill>
+            <Fill>
+              <List margin={10}>
+                <ListItem>
+                  chai
+                  <CodePane textSize={20} lang="js" source={code.assertions.chai}/>
+                </ListItem>
+                <ListItem>
+                  Sinon.JS (spies, stubs and mocks)
+                </ListItem>
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="
+        Libraries of test cases, interface to execute (typically command line)
+      <ul>
+        <li>QUnit: Basic, popular for jquery</li>
+        <li>Jasmine: Built in assertions (expect style) and mocking</li>
+        <li>Jest: FB stack. Built on top of jasmine.</li>
+        <li>Mocha: No assertions nor mocks. Typically used with chai and sinon.</li>
+        <li>AVA: Runs tests in parallel. Built-in power-assert library.</li>
+      </ul>
+      " textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            Vocabulary: Testing Frameworks
+          </Heading>
+          <Layout>
+            <Fill>
+              <Text textAlign="left" textColor="tertiary" bold caps>unit</Text>
+              <List>
+                <ListItem>QUnit</ListItem>
+                <ListItem>Jasmine</ListItem>
+                <ListItem>Jest</ListItem>
+                <ListItem>Mocha</ListItem>
+                <ListItem>AVA</ListItem>
+              </List>
+            </Fill>
+            <Fill>
+              <Text textAlign="left" textColor="tertiary" bold caps>End-to-end ("e2e")</Text>
+              <List>
+                <ListItem>Casper.js (phantom.js)</ListItem>
+                <ListItem>Protractor (selenium webdriver)</ListItem>
+                <ListItem>Nightwatch.js (selenium webdriver)</ListItem>
+                <ListItem>Capybara (selenium webdriver)</ListItem>
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="executes your test " textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            Vocabulary: Unit test "runners"
+          </Heading>
+          <List>
+            <ListItem>Karma (formerly "Testacular")</ListItem>
+            <ListItem>Testem</ListItem>
+            <ListItem>Wallaby (commercial)</ListItem>
+            <ListItem>Chutzpah (Windows)</ListItem>
+          </List>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary">
+          <Heading textColor="secondary" caps fit>Testing Frameworks: Unit Tests</Heading>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            Unit Testing Frameworks: Jasmine
+          </Heading>
+          <Layout>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="bash" source={code.frameworks.unit.jasmine.install} />
+              </List>
+            </Fill>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="bash" source={code.frameworks.unit.jasmine.configure} />
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            Unit Testing Frameworks: Jasmine
+          </Heading>
+          <Layout>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="js" source={code.frameworks.unit.code.example} />
+              </List>
+            </Fill>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="js" source={code.frameworks.unit.jasmine.spec} />
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            Unit Testing Frameworks: Mocha
+          </Heading>
+          <Layout>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="bash" source={code.frameworks.unit.mocha.install} />
+              </List>
+            </Fill>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="bash" source={code.frameworks.unit.mocha.configure} />
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="two small differences:<br/>1) require<br/>2) to.equal(" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            Unit Testing Frameworks: Mocha
+          </Heading>
+          <Layout>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="js" source={code.frameworks.unit.code.example} />
+              </List>
+            </Fill>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="js" source={code.frameworks.unit.mocha.spec} />
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            Unit Testing Frameworks: Jest
+          </Heading>
+          <Layout>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="bash" source={code.frameworks.unit.jest.install} />
+              </List>
+            </Fill>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="bash" source={code.frameworks.unit.jest.configure} />
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="dontMock: mocked by default, can check if method of mocked import was called with args later" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            Unit Testing Frameworks: Jest
+          </Heading>
+          <Layout>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="js" source={code.frameworks.unit.code.example} />
+              </List>
+            </Fill>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="js" source={code.frameworks.unit.jest.spec} />
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            Unit Testing Frameworks: AVA
+          </Heading>
+          <Layout>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="bash" source={code.frameworks.unit.ava.install} />
+              </List>
+            </Fill>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="bash" source={code.frameworks.unit.ava.configure} />
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            Unit Testing Frameworks: AVA
+          </Heading>
+          <Layout>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="js" source={code.frameworks.unit.code.example} />
+              </List>
+            </Fill>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="js" source={code.frameworks.unit.ava.spec} />
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary">
+          <Heading textColor="secondary" caps fit>Testing Frameworks: e2e Tests</Heading>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            e2e Testing Frameworks: Nightwatch.js
+          </Heading>
+          <Layout>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="bash" source={code.frameworks.e2e.nightwatch.install} />
+              </List>
+            </Fill>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="bash" source={code.frameworks.e2e.nightwatch.configure} />
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            e2e Testing Frameworks: Nightwatch.js
+          </Heading>
+          <CodePane textSize={20} lang="js" source={code.frameworks.e2e.nightwatch.test} />
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="against phantomJS only (there are some ways -> firefox)" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            e2e Testing Frameworks: Casper.js
+          </Heading>
+          <Layout>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="bash" source={code.frameworks.e2e.casper.install} />
+              </List>
+            </Fill>
+            <Fill>
+              <List margin={10}>
+                <CodePane textSize={20} lang="bash" source={code.frameworks.e2e.casper.configure} />
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="Chrome extension 'Resurrectio' to record actions into tests" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            e2e Testing Frameworks: Casper.js
+          </Heading>
+          <CodePane textSize={20} lang="js" source={code.frameworks.e2e.casper.test} />
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary">
+          <Heading textColor="secondary" caps fit>React unit testing</Heading>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            React unit testing: Mocha
+          </Heading>
+          <Heading size={7} fit textColor="tertiary">
+            Testing Data-Flow: REDUX!
+          </Heading>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            React unit testing: Mocha
+          </Heading>
+          <Heading size={7} fit textColor="tertiary">
+            Testing Components
+          </Heading>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="" textColor="tertiary">
+          <Heading size={5} fit textColor="secondary">
+            e2e testing: Mocha
+          </Heading>
+          <Heading size={7} fit textColor="tertiary">
+            Nightwatch.js
+          </Heading>
+        </Slide>
+        <Slide maxWidth={1600} maxHeight={900} bgColor="primary" notes="" textColor="tertiary">
+          <Heading fit textColor="secondary">
+            Happy testing!
+          </Heading>
+        </Slide>
+      </Deck>
+    </Spectacle>
+    , document.getElementById("root"));
 
-You can write inline images, [Markdown Links](http://commonmark.org), paragraph text and most other markdown syntax
-* Lists too!
-* With ~~strikethrough~~ and _italic_
-* And lets not forget **bold**
-          `}
-        </Markdown>
-      </Slide>
-      <Slide transition={["slide", "spin"]} bgColor="primary">
-        <Heading caps fit size={1} textColor="tertiary">
-          Smooth
-        </Heading>
-        <Heading caps fit size={1} textColor="secondary">
-          Combinable Transitions
-        </Heading>
-      </Slide>
-      <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-        <List>
-          <ListItem><Appear fid="1">Inline style based theme system</Appear></ListItem>
-          <ListItem><Appear fid="2">Autofit text</Appear></ListItem>
-          <ListItem><Appear fid="3">Flexbox layout system</Appear></ListItem>
-          <ListItem><Appear fid="4">React-Router navigation</Appear></ListItem>
-          <ListItem><Appear fid="5">PDF export</Appear></ListItem>
-          <ListItem><Appear fid="6">And...</Appear></ListItem>
-        </List>
-      </Slide>
-      <Slide transition={["slide"]} bgColor="primary">
-        <Heading size={1} caps fit textColor="tertiary">
-          Your presentations are interactive
-        </Heading>
-        <Interactive/>
-      </Slide>
-      <Slide transition={["spin", "slide"]} bgColor="tertiary">
-        <Heading size={1} caps fit lineHeight={1.5} textColor="primary">
-          Made with love in Seattle by
-        </Heading>
-        <Link href="http://www.formidablelabs.com"><Image width="100%" src={images.logo}/></Link>
-      </Slide>
-    </Deck>
-  </Spectacle>
-, document.getElementById("root"));
+preloader([images.city, images.kat, images.markdown]);

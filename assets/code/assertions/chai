@@ -1,0 +1,8 @@
+// Should-style
+foo.should.equal('bar');
+
+// Expect-style
+expect(foo).to.equal('bar');
+
+// Assert-style
+assert.equal(foo, 'bar');

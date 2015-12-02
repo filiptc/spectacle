@@ -1,14 +1,14 @@
 /*eslint-disable object-shorthand*/
 
 const defaultColors = {
-  primary: "black",
-  secondary: "black",
-  tertiary: "black"
+  primary: "#000000",
+  secondary: "#60D7F7",
+  tertiary: "#DADADA"
 };
 
 const defaultFonts = {
   primary: "Open Sans Condensed",
-  secondary: "Lobster Two",
+  secondary: "Open Sans Condensed",
   tertiary: "monospace"
 };
 
@@ -51,7 +51,7 @@ const print = (colorArgs = defaultColors, fontArgs = defaultFonts) => {
         fontWeight: "bold"
       },
       cite: {
-        color: "black",
+        color: colors.secondary,
         display: "block",
         clear: "left",
         fontSize: "2rem",

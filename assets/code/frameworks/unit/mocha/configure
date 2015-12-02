@@ -1,0 +1,5 @@
+# create test dir
+mkdir test
+
+# create test
+$EDITOR test/foo.js

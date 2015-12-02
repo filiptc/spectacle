@@ -1,0 +1,6 @@
+# install
+npm install -g nightwatch
+
+#download selenium standalone server
+npm install selenium-standalone --save-dev
+ ./node_modules/selenium-standalone/bin/selenium-standalone install
